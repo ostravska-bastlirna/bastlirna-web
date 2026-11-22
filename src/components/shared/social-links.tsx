@@ -6,10 +6,14 @@ import { getDiscordInviteUrl, getGithubUrl, getLinkedinUrl } from "@/lib/links";
 
 const iconLinkClass = "inline-flex size-9 items-center justify-center border border-primary/40 text-white/80 transition-colors hover:border-primary hover:text-primary focus-visible:border-primary focus-visible:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary";
 
-export const SocialLinks = async () => {
+type SocialLinksProps = {
+  includeDiscord?: boolean;
+};
+
+export const SocialLinks = async ({ includeDiscord = true }: SocialLinksProps) => {
   const githubUrl = getGithubUrl();
   const linkedinUrl = getLinkedinUrl();
-  const discordUrl = getDiscordInviteUrl();
+  const discordUrl = includeDiscord ? getDiscordInviteUrl() : undefined;
   if (!githubUrl && !linkedinUrl && !discordUrl) return null;
 
   const t = await getTranslations("nav");
