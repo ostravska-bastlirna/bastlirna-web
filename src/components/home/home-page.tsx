@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { LogoMark } from "@/components/shared/logo-mark";
 import { DiscordAction } from "@/components/shared/discord-action";
 import { SiteHeader } from "@/components/shared/site-header";
+import { SocialLinks } from "@/components/shared/social-links";
 import { TerminalRule } from "@/components/shared/terminal-rule";
 import { Button } from "@/components/ui/button";
 import { getUpcomingEvents } from "@/data/events";
@@ -72,9 +73,14 @@ const RegistrationAction = ({ url, label, className }: { url: string; label: str
   <Button asChild className={className}><a href={url} target="_blank" rel="noopener noreferrer">{label} <span aria-hidden="true">↗</span></a></Button>
 );
 
-export const HomePage = async ({ inviteUrl, eventUrl }: { inviteUrl?: string; eventUrl?: string }) => {
+type HomePageProps = {
+  inviteUrl?: string;
+  eventUrl?: string;
+  calendarUrl?: string;
+};
+
+export const HomePage = async ({ inviteUrl, eventUrl, calendarUrl }: HomePageProps) => {
   const upcomingEvents = getUpcomingEvents();
-  const registrationUrl = upcomingEvents.find((event) => event.url)?.url;
   const t = await getTranslations("home");
   const site = await getTranslations("site");
   const prompt = t("prompt");
@@ -96,7 +102,7 @@ export const HomePage = async ({ inviteUrl, eventUrl }: { inviteUrl?: string; ev
               <p className="mt-8 max-w-[34ch] text-base leading-7 text-white sm:text-xl sm:leading-8">{t("intro")}</p>
               <p className="mt-7 text-sm leading-6 text-amber sm:text-base">{t("meetups")}</p>
               <p className="mt-1 max-w-[40ch] text-sm leading-6 text-white/70">{t("meetupsDetail")}</p>
-              <div className="mt-8 flex flex-wrap items-start gap-5">{registrationUrl && <RegistrationAction url={registrationUrl} label={t("register")} />}<DiscordAction inviteUrl={inviteUrl} variant={registrationUrl ? "outline" : "default"} />{eventUrl && <Button asChild variant="outline"><a href={eventUrl} target="_blank" rel="noopener noreferrer">{t("eventDetail")} <span aria-hidden="true">↗</span></a></Button>}</div>
+              <div className="mt-8 flex flex-wrap items-start gap-5">{calendarUrl && <RegistrationAction url={calendarUrl} label={t("register")} />}<DiscordAction inviteUrl={inviteUrl} variant={calendarUrl ? "outline" : "default"} />{eventUrl && <Button asChild variant="outline"><a href={eventUrl} target="_blank" rel="noopener noreferrer">{t("eventDetail")} <span aria-hidden="true">↗</span></a></Button>}</div>
             </div>
           </div>
 
@@ -125,7 +131,7 @@ export const HomePage = async ({ inviteUrl, eventUrl }: { inviteUrl?: string; ev
         </div>
       </section>
 
-      <EventsSection events={upcomingEvents} />
+      <EventsSection events={upcomingEvents} calendarUrl={calendarUrl} />
 
       <section id="o-bastlirne" className="scroll-mt-8 px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-24">
@@ -142,7 +148,10 @@ export const HomePage = async ({ inviteUrl, eventUrl }: { inviteUrl?: string; ev
             <h2 className="mt-6 max-w-[25ch] text-2xl leading-tight sm:text-3xl">{t("footerTitle")}</h2>
             <p className="mt-4 max-w-[55ch] text-sm leading-7 text-muted">{t("footerText")}</p>
           </div>
-          <DiscordAction inviteUrl={inviteUrl} variant="outline" />
+          <div className="flex flex-col items-start gap-5 lg:items-end">
+            <DiscordAction inviteUrl={inviteUrl} variant="outline" />
+            <SocialLinks />
+          </div>
         </div>
       </footer>
     </main>

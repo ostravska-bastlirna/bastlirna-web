@@ -6,10 +6,12 @@
     "description": "Komunita lidí, kteří v Ostravě staví věci a chtějí se potkávat nad vlastními projekty."
   },
   "nav": {
+    "label": "Hlavní navigace",
     "homeLabel": "Ostravská Bastlírna – úvod",
     "about": "O Bastlírně",
     "discord": "Přidat se na Discord",
     "github": "Ostravská Bastlírna na GitHubu",
+    "linkedin": "Ostravská Bastlírna na LinkedInu",
     "qr": "QR kód",
     "home": "Zpět na úvod"
   },
@@ -35,7 +37,9 @@
   },
   "events": {
     "title": "následující akce",
-    "register": "Registrace na akci"
+    "register": "Registrace na akci",
+    "calendar": "Kalendář všech akcí",
+    "empty": "Další setkání připravujeme. Sleduj náš kalendář."
   },
   "qr": {
     "pageTitle": "QR kód",

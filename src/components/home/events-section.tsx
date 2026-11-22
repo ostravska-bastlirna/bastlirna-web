@@ -6,16 +6,21 @@ import { formatTime, type Event } from "@/data/events";
 const formatDate = (iso: string) =>
   new Intl.DateTimeFormat("cs-CZ", { weekday: "long", day: "numeric", month: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 
-export const EventsSection = async ({ events }: { events: Event[] }) => {
+type EventsSectionProps = {
+  events: Event[];
+  calendarUrl?: string;
+};
+
+export const EventsSection = async ({ events, calendarUrl }: EventsSectionProps) => {
+  if (events.length === 0 && !calendarUrl) return null;
   const t = await getTranslations("events");
-  if (events.length === 0) return null;
 
   return (
     <section id="akce" className="scroll-mt-8 border-b border-primary/30 px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <TerminalRule />
         <h2 className="mt-8 text-4xl leading-[1.1] tracking-[-.06em] sm:text-5xl">{t("title")}</h2>
-        <ol className="mt-12 border-t border-primary/30">
+        {events.length > 0 ? <ol className="mt-12 border-t border-primary/30">
           {events.map((event, i) => (
             <li key={`${event.date}-${event.title}`} className="grid gap-4 border-b border-primary/30 py-6 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-8">
               <span className="text-xs text-primary" aria-hidden="true">[{String(i + 1).padStart(2, "0")}]</span>
@@ -31,7 +36,12 @@ export const EventsSection = async ({ events }: { events: Event[] }) => {
               )}
             </li>
           ))}
-        </ol>
+        </ol> : <p className="mt-8 text-sm leading-7 text-muted">{t("empty")}</p>}
+        {calendarUrl && (
+          <Button asChild variant="outline" className="mt-8">
+            <a href={calendarUrl} target="_blank" rel="noopener noreferrer">{t("calendar")} <span aria-hidden="true">↗</span></a>
+          </Button>
+        )}
       </div>
     </section>
   );

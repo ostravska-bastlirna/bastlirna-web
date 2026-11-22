@@ -9,3 +9,13 @@ export const getGithubUrl = () => {
   const url = process.env.GITHUB_URL;
   return url?.startsWith("https://github.com/") ? url : undefined;
 };
+
+export const getLinkedinUrl = () => {
+  const url = process.env.LINKEDIN_URL;
+  return url?.startsWith("https://www.linkedin.com/") || url?.startsWith("https://linkedin.com/") ? url : undefined;
+};
+
+export const getLumaCalendarUrl = () => {
+  const url = process.env.LUMA_CALENDAR_URL;
+  return url?.startsWith("https://luma.com/") || url?.startsWith("https://lu.ma/") ? url : undefined;
+};

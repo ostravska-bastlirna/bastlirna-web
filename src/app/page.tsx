@@ -1,7 +1,7 @@
 import { HomePage } from "@/components/home/home-page";
-import { getDiscordInviteUrl } from "@/lib/links";
+import { getDiscordInviteUrl, getLumaCalendarUrl } from "@/lib/links";
 
-// Re-render at most once a minute so finished events drop off and registration moves to the next one.
+// Re-render at most once a minute so finished events drop off.
 export const revalidate = 60;
 
 export default function Page() {
@@ -9,6 +9,7 @@ export default function Page() {
   return (
     <HomePage
       inviteUrl={getDiscordInviteUrl()}
+      calendarUrl={getLumaCalendarUrl()}
       eventUrl={eventUrl?.startsWith("https://") ? eventUrl : undefined}
     />
   );
