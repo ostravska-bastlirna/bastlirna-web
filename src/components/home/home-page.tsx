@@ -90,7 +90,6 @@ export const HomePage = async ({ inviteUrl, eventUrl, calendarUrl }: HomePagePro
     <main className="overflow-hidden bg-background text-foreground">
       <SiteHeader />
       <section className="relative overflow-hidden border-b border-primary/30">
-        <div className={`${styles.grid} pointer-events-none absolute inset-0`} aria-hidden="true" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-10 sm:px-8 sm:py-14 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:gap-16 lg:px-12 lg:py-20">
           <div>
             <p className="text-xs text-primary sm:text-sm"><span aria-hidden="true">&gt; </span><span className={styles.prompt} style={vars({ "--chars": prompt.length })}>{prompt}</span></p>

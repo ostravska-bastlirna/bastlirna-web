@@ -1,9 +1,5 @@
 /* Visual language: flat fills only (no gradients, no shadows). Motion is stepped like a terminal. */
 
-.grid {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M48 0H0v48' fill='none' stroke='%232fd6ff' stroke-opacity='.06'/%3E%3C/svg%3E");
-}
-
 /* --- typing --- */
 .prompt {
   display: inline-block;
