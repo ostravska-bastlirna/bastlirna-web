@@ -148,7 +148,7 @@ export const HomePage = async ({ inviteUrl, eventUrl, calendarUrl }: HomePagePro
             <p className="mt-4 max-w-[55ch] text-sm leading-7 text-muted">{t("footerText")}</p>
           </div>
           <div className="flex flex-wrap items-center gap-5">
-            <SocialLinks includeDiscord={false} />
+            <SocialLinks variant="footer" />
             <DiscordAction inviteUrl={inviteUrl} variant="outline" />
           </div>
         </div>
